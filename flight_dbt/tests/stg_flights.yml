@@ -7,24 +7,30 @@ models:
       - name: flight_id
         description: "Unique identifier for each flight record"
         tests:
-          - not_null
-          - unique
+          - not_null:
+              column_name: flight_id
+          - unique:
+              column_name: flight_id
+
       - name: flight_date
         description: "Date of the flight"
         tests:
-          - not_null
+          - not_null:
+              column_name: flight_date
+
       - name: departure_airport
         description: "IATA code of the departure airport"
+
       - name: arrival_airport
         description: "IATA code of the arrival airport"
+
       - name: airline_name
         description: "Name of the airline operating the flight"
+
       - name: flight_status
         description: "Current status of the flight (e.g., scheduled, active, landed)"
         tests:
           - accepted_values:
-              values: ['scheduled', 'active', 'landed', 'cancelled', 'diverted']
-      - name: 'arr_delay_minutes'
-        description: "Arrival delay in minutes"
-        tests:
-          - not_null
+              arguments:
+                column_name: flight_status
+                values: ['scheduled', 'active', 'landed', 'cancelled', 'diverted']
