@@ -1,0 +1,54 @@
+{
+  "pagination": {
+    "limit": 100,
+    "offset": 0,
+    "count": 100,
+    "total": 75250
+  },
+  "data": [
+    {
+      "flight_date": "2025-11-08",
+      "flight_status": "scheduled",
+      "departure": {
+        "airport": "Changsha",
+        "timezone": "Asia/Shanghai",
+        "iata": "CSX",
+        "icao": "ZGHA",
+        "terminal": null,
+        "gate": null,
+        "delay": null,
+        "scheduled": "2025-11-08T02:00:00+00:00",
+        "estimated": "2025-11-08T02:00:00+00:00",
+        "actual": null,
+        "estimated_runway": null,
+        "actual_runway": null
+      },
+      "arrival": {
+        "airport": "Hangzhou",
+        "timezone": "Asia/Shanghai",
+        "iata": "HGH",
+        "icao": "ZSHC",
+        "terminal": null,
+        "gate": null,
+        "baggage": null,
+        "scheduled": "2025-11-08T03:10:00+00:00",
+        "delay": null,
+        "estimated": null,
+        "actual": null,
+        "estimated_runway": null,
+        "actual_runway": null
+      },
+      "airline": {
+        "name": "SF Airlines",
+        "iata": "O3",
+        "icao": "CSS"
+      },
+      "flight": {
+        "number": "6903",
+        "iata": "O36903",
+        "icao": "CSS6903",
+        "codeshared": null
+      },
+      "aircraft": null,
+      "live": null
+    }
