@@ -44,3 +44,79 @@ Runtime Error
 [0m23:15:17.528517 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4bb05ab490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4bb05af530>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4bb0552360>]}
 [0m23:15:17.528974 [debug] [MainThread]: Flushing usage events
 [0m23:15:18.533931 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m11:06:22.768351 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2296547e00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2295ca7d90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f229559bd90>]}
+
+
+============================== 11:06:22.779255 | fd9fd260-fb8d-4e9c-a69a-0e2ff96e91c7 ==============================
+[0m11:06:22.779255 [info ] [MainThread]: Running with dbt=1.10.13
+[0m11:06:22.780055 [debug] [MainThread]: running dbt with arguments {'target_path': 'None', 'log_path': 'logs', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'profiles_dir': '/home/hsooni/.dbt', 'warn_error': 'None', 'empty': 'None', 'invocation_command': 'dbt debug', 'use_colors': 'True', 'send_anonymous_usage_stats': 'True', 'fail_fast': 'False', 'static_parser': 'True', 'version_check': 'True', 'log_format': 'default', 'log_cache_events': 'False', 'no_print': 'None', 'cache_selected_only': 'False', 'quiet': 'False', 'introspect': 'True', 'use_experimental_parser': 'False', 'partial_parse': 'True', 'debug': 'False', 'indirect_selection': 'eager', 'printer_width': '80', 'write_json': 'True'}
+[0m11:06:22.807587 [info ] [MainThread]: dbt version: 1.10.13
+[0m11:06:22.808297 [info ] [MainThread]: python version: 3.13.7
+[0m11:06:22.808942 [info ] [MainThread]: python path: /home/hsooni/flight_analytics_pipeline/.venv/bin/python
+[0m11:06:22.810323 [info ] [MainThread]: os info: Linux-6.17.7-arch1-1-x86_64-with-glibc2.42
+[0m11:06:22.879875 [info ] [MainThread]: Using profiles dir at /home/hsooni/.dbt
+[0m11:06:22.880492 [info ] [MainThread]: Using profiles.yml file at /home/hsooni/.dbt/profiles.yml
+[0m11:06:22.881007 [info ] [MainThread]: Using dbt_project.yml file at /home/hsooni/flight_analytics_pipeline/dbt_project.yml
+[0m11:06:22.881656 [info ] [MainThread]: adapter type: postgres
+[0m11:06:22.882063 [info ] [MainThread]: adapter version: 1.9.1
+[0m11:06:22.882498 [info ] [MainThread]: Configuration:
+[0m11:06:22.882919 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m11:06:22.883318 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m11:06:22.883719 [info ] [MainThread]: Required dependencies:
+[0m11:06:22.884137 [debug] [MainThread]: Executing "git --help"
+[0m11:06:22.886484 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Reset current HEAD to the specified state\n   switch     Switch branches\n   tag        Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m11:06:22.887152 [debug] [MainThread]: STDERR: "b''"
+[0m11:06:22.887567 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m11:06:22.888024 [info ] [MainThread]: Connection:
+[0m11:06:22.888460 [info ] [MainThread]:   host: localhost
+[0m11:06:22.888898 [info ] [MainThread]:   port: 5432
+[0m11:06:22.889327 [info ] [MainThread]:   user: hsooni
+[0m11:06:22.889754 [info ] [MainThread]:   database: mydb
+[0m11:06:22.890161 [info ] [MainThread]:   schema: public
+[0m11:06:22.890569 [info ] [MainThread]:   connect_timeout: 10
+[0m11:06:22.890992 [info ] [MainThread]:   role: None
+[0m11:06:22.891399 [info ] [MainThread]:   search_path: None
+[0m11:06:22.891827 [info ] [MainThread]:   keepalives_idle: 0
+[0m11:06:22.892232 [info ] [MainThread]:   sslmode: None
+[0m11:06:22.892660 [info ] [MainThread]:   sslcert: None
+[0m11:06:22.893076 [info ] [MainThread]:   sslkey: None
+[0m11:06:22.893498 [info ] [MainThread]:   sslrootcert: None
+[0m11:06:22.893995 [info ] [MainThread]:   application_name: dbt
+[0m11:06:22.894449 [info ] [MainThread]:   retries: 1
+[0m11:06:22.895015 [info ] [MainThread]: Registered adapter: postgres=1.9.1
+[0m11:06:22.980774 [debug] [MainThread]: Acquiring new postgres connection 'debug'
+[0m11:06:23.014770 [debug] [MainThread]: Using postgres connection "debug"
+[0m11:06:23.015394 [debug] [MainThread]: On debug: select 1 as id
+[0m11:06:23.015852 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m11:06:23.019803 [debug] [MainThread]: Postgres adapter: Got a retryable error when attempting to open a postgres connection.
+1 attempts remaining. Retrying in 0 seconds.
+Error:
+connection to server at "localhost" (::1), port 5432 failed: FATAL:  role "hsooni" does not exist
+
+[0m11:06:23.022739 [debug] [MainThread]: Postgres adapter: Error running SQL: select 1 as id
+[0m11:06:23.023315 [debug] [MainThread]: Postgres adapter: Rolling back transaction.
+[0m11:06:23.023787 [debug] [MainThread]: On debug: No close available on handle
+[0m11:06:23.024217 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m11:06:23.024717 [info ] [MainThread]: [31m2 checks failed:[0m
+[0m11:06:23.025133 [info ] [MainThread]: Project loading failed for the following reason:
+ project path </home/hsooni/flight_analytics_pipeline/dbt_project.yml> not found
+
+[0m11:06:23.025554 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  connection to server at "localhost" (::1), port 5432 failed: FATAL:  role "hsooni" does not exist
+  
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m11:06:23.027136 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 0.32523257, "process_in_blocks": "57032", "process_kernel_time": 0.197644, "process_mem_max_rss": "112648", "process_out_blocks": "24", "process_user_time": 1.763442}
+[0m11:06:23.027791 [debug] [MainThread]: Command `dbt debug` failed at 11:06:23.027654 after 0.33 seconds
+[0m11:06:23.028256 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m11:06:23.028755 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f22943f9480>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f2294ace570>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f229545e140>]}
+[0m11:06:23.029328 [debug] [MainThread]: Flushing usage events
+[0m11:06:23.942326 [debug] [MainThread]: An error was encountered while trying to flush usage events

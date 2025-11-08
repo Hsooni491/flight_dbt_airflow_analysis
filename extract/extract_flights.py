@@ -9,7 +9,6 @@ ROW_NUM = 100
 # API Request
 r = requests.get(f'https://api.aviationstack.com/v1/flights', params={
 	'access_key': ACCESS_KEY,
-	'dep_iata': 'JED',
 	'limit': ROW_NUM
 })
 
