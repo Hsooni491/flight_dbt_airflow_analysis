@@ -35,7 +35,7 @@ with DAG(
 
 	transform_data = BashOperator(
 		task_id='run_dbt_models',
-		bash_command='cd ~/flight_dbt && dbt run'
+		bash_command="cd /home/hsooni/flight-dbt-airflow-analysis/flight_dbt && dbt run"
 	)	
 
 extract_data >> load_data >> transform_data

@@ -36,12 +36,19 @@ def extract_flights_data(api_url):
 
 
 
-def load_flights_data(database_url, ti):
 
+def load_flights_data(database_url, ti):
     # Pull the extracted JSON records from XCom
-    records = ti.xcom_pull(task_ids='extract_flight_api_data')
+    records = ti.xcom_pull(task_ids='extract_api_flight_data')
 
     df = pd.DataFrame(records)
 
     engine = create_engine(database_url)
-    df.to_sql('raw_flights', engine, if_exists='append', index=False)
+    
+    df = df.to_sql(
+		name='raw_flights',
+		if_exists='append',
+		con=engine,
+		index=False
+	)
+
