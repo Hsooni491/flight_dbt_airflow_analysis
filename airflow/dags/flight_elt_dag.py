@@ -6,7 +6,10 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 sys.path.append(project_root)
-from extract.extract_flights import extract_flights_data, load_flights_data
+from extract_load.extract_load_flights import extract_flights_data, load_flights_data
+from logging_config import setup_project_logger
+
+setup_project_logger()
 
 api_url = 'https://api.aviationstack.com/v1/flights'
 database_url = 'postgresql+psycopg2://postgres:1234@localhost:5432/mydb'

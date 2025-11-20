@@ -1,0 +1,3 @@
+2025-11-20 23:13:37,676 | myproject | INFO | Starting data extraction from API: https://api.aviationstack.com/v1/flights
+2025-11-20 23:13:41,765 | myproject | INFO | API request successful with status code 200
+2025-11-20 23:13:41,769 | myproject | INFO | Extracted 100 flight records
