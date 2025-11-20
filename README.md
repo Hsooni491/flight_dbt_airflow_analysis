@@ -2,6 +2,8 @@
 
 **Flight-dbt-airflow-analysis** is a production-grade ELT pipeline demonstrating modern data engineering best practices for aviation analytics. Apache Airflow orchestrates the workflow, AviationStack supplies live flight data, PostgreSQL stores the landing zone, and dbt transforms raw records into business-ready data marts.
 
+*This project showcases modern data engineering patterns and best practices for building production-ready ELT pipelines.*
+
 ---
 
 ## ✨ Highlights
@@ -59,7 +61,7 @@ The project includes an enhanced logging layer for comprehensive traceability th
 
 Enhanced logging provides:
 - **Faster Debugging** – Quickly identify API failures or database connection issues
-- **ETL Throughput Visibility** – Track record counts and processing times
+- **ELT Throughput Visibility** – Track record counts and processing times
 - **Production-Grade Observability** – Monitor pipeline health and data quality in real-time
 - **Audit Trail** – Complete record of all extraction and loading operations
 
