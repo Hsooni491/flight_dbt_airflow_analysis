@@ -1,5 +1,12 @@
+from extract.extract_flights import extract_flights_data
+from extract.extract_flights import load_flights_data
+import pandas as pd
+from unittest.mock import MagicMock
+from sqlalchemy import create_engine, text
+
 def test_extract_flights_data():
-	from extract.extract_flights import extract_flights_data
+	'''Check if the extract_flights_data function returns a list of records'''
+	
 	api_url = 'https://api.aviationstack.com/v1/flights'
 	records = extract_flights_data(api_url=api_url)
 	assert isinstance(records, list)
@@ -8,10 +15,8 @@ def test_extract_flights_data():
 
 
 
-def test_load_flights_data():
-	from extract.extract_flights import load_flights_data
-	import pandas as pd
-	from unittest.mock import MagicMock
+def test_load_flights_data():	
+	'''Check if the load_flights_data function loads data into the database correctly'''
 
 	database_url = 'postgresql+psycopg2://postgres:1234@localhost:5432/mydb'
 
@@ -37,8 +42,7 @@ def test_load_flights_data():
 
 	load_flights_data(database_url, ti_mock)
 
-	# Verify data was loaded correctly
-	from sqlalchemy import create_engine, text
+	
 
 	engine = create_engine(database_url)
 	with engine.connect() as conn:
