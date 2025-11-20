@@ -1,7 +1,11 @@
+import sys
+import os
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.append(project_root)
 from extract.extract_flights import extract_flights_data, load_flights_data
 
 api_url = 'https://api.aviationstack.com/v1/flights'
