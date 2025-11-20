@@ -1,134 +1,210 @@
-# Flight ETL with Airflow & dbt
+# Flight ELT with Airflow & dbt
 
-Flight-dbt-airflow-analysis is a production-style ELT pipeline that demonstrates modern data engineering practices for aviation analytics. Apache Airflow orchestrates the workflow, AviationStack supplies live flight data, PostgreSQL stores the landing zone, and dbt transforms the records into business-ready marts.
+**Flight-dbt-airflow-analysis** is a production-grade ELT pipeline demonstrating modern data engineering best practices for aviation analytics. Apache Airflow orchestrates the workflow, AviationStack supplies live flight data, PostgreSQL stores the landing zone, and dbt transforms raw records into business-ready data marts.
 
-## Highlights
+---
 
-- **Automated orchestration** – Airflow DAG (`airflow/dags/flight_elt_dag.py`) wires the extract → load → transform flow
-- **Resilient ingestion** – `extract_flights_data` normalizes AviationStack responses and enforces schemas before loading
-- **Warehouse-ready loading** – Pandas + SQLAlchemy push curated rows into the `raw_flights` table
-- **Modular transformations** – dbt models (`flight_dbt/`) deliver staging layers plus airline, airport, and status fact tables
-- **Test-first mindset** – Pytest coverage (`airflow/dags/extract/tests`) validates custom operators and mocks Airflow XCom behavior
+## ✨ Highlights
 
-## Architecture
+- **Automated Orchestration** – Airflow DAG (`airflow/dags/flight_elt_dag.py`) orchestrates the complete extract → load → transform workflow
+- **Resilient Ingestion** – `extract_flights_data` normalizes AviationStack API responses and enforces schemas before loading
+- **Warehouse-Ready Loading** – Pandas + SQLAlchemy efficiently push curated rows into the `raw_flights` table
+- **Modular Transformations** – dbt models (`flight_dbt/`) deliver staging layers plus airline, airport, and status fact tables
+- **Test-First Mindset** – Pytest coverage (`airflow/dags/extract/tests`) validates custom operators and mocks Airflow XCom behavior
+- **Structured Logging** – Custom logging integrated across extract & load steps for enhanced observability and debugging
 
-1. **Extract** – `extract_flights_data` calls `https://api.aviationstack.com/v1/flights`, limits the payload, and shapes the JSON
-2. **Load** – `load_flights_data` retrieves the records from Airflow XCom and appends them to PostgreSQL via SQLAlchemy
-3. **Transform** – A BashOperator triggers `dbt run` in `flight_dbt`, building staging models and fact marts on top of `raw_flights`
+---
 
-```
-AviationStack API ──> Airflow extract task ──> PostgreSQL raw_flights ──> dbt models ──> curated marts
-```
-
-## Tech Stack
-
-- Apache Airflow 2.x
-- PostgreSQL 14+ with SQLAlchemy
-- dbt Core (Postgres adapter)
-- Python 3.10+, pandas, requests
-- Pytest for unit testing
-
-## Repository Layout
+## 📊 Architecture
 
 ```
-airflow/
-  dags/
-    flight_elt_dag.py        # DAG definition
-    extract/
-      extract_flights.py     # extract/load helpers
-      tests/test_elt_functions.py
-flight_dbt/
-  models/staging             # source + staging model
-  models/marts               # fact tables: airports, delays, status
-  dbt_project.yml            # dbt configuration
-raw_flights_sample.json      # example payload for quick validation
+AviationStack API 
+    ↓
+Airflow Extract Task (with logging)
+    ↓
+PostgreSQL raw_flights table
+    ↓
+dbt Models (staging + marts)
+    ↓
+Curated Data Marts
 ```
 
-## Prerequisites
+**ELT Pipeline Flow:**
+1. **Extract** – `extract_flights_data` calls the AviationStack API, limits payload size, logs request/response metadata, and shapes JSON data
+2. **Load** – `load_flights_data` retrieves XCom records, logs insert operations, and appends data to PostgreSQL via SQLAlchemy
+3. **Transform** – BashOperator triggers `dbt run` in `flight_dbt/`, building staging models and fact marts on top of `raw_flights`
 
-- Python 3.10+ and virtualenv/venv
-- PostgreSQL instance reachable from Airflow
-- AviationStack API key (free tier works for demos)
-- Airflow CLI access (local install or managed service)
+---
 
-## Setup
+## 🪵 Logging
 
-1. **Clone the repository**
+The project includes an enhanced logging layer for comprehensive traceability throughout the ELT pipeline.
+
+### What's Logged?
+
+- API call events with request start/end timestamps
+- Number of records extracted per run
+- Schema validation results and data quality checks
+- Data load operations (rows inserted, target table, connection status)
+- Error handling with detailed exception messages and stack traces
+
+### Where Logs Appear
+
+- **Airflow Task Logs** – Located in `airflow/logs/...` with full task execution history
+- **Python Application Logs** – Using standard `logging` module within:
+  - `extract_flights_data`
+  - `load_flights_data`
+
+### Why It Matters
+
+Enhanced logging provides:
+- **Faster Debugging** – Quickly identify API failures or database connection issues
+- **ETL Throughput Visibility** – Track record counts and processing times
+- **Production-Grade Observability** – Monitor pipeline health and data quality in real-time
+- **Audit Trail** – Complete record of all extraction and loading operations
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|-----------|------------|
+| **Orchestration** | Apache Airflow 2.x |
+| **Database** | PostgreSQL 14+ with SQLAlchemy |
+| **Transformation** | dbt Core (Postgres adapter) |
+| **Language** | Python 3.10+ |
+| **Data Processing** | pandas, requests |
+| **Testing** | pytest |
+| **Observability** | Python logging module |
+
+---
+
+## 📁 Repository Structure
+
+```
+flight-dbt-airflow-analysis/
+├── airflow/
+│   ├── dags/
+│   │   ├── flight_elt_dag.py              # Main DAG definition
+│   │   └── extract/
+│   │       ├── extract_flights.py         # Extract/load helpers with logging
+│   │       └── tests/
+│   │           └── test_elt_functions.py  # Unit tests
+│   └── logs/                              # Airflow task logs
+├── flight_dbt/
+│   ├── models/
+│   │   ├── staging/                       # Staging layer models
+│   │   └── marts/                         # Business logic marts
+│   └── dbt_project.yml                    # dbt configuration
+├── raw_flights_sample.json                # Sample API response
+└── README.md
+```
+
+---
+
+## 🚀 Setup
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Hsooni491/flight-dbt-airflow-analysis.git
 cd flight-dbt-airflow-analysis
 ```
 
-2. **Create and activate a virtual environment**
+### 2. Create and Activate Virtual Environment
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
-3. **Install dependencies**
+### 3. Install Dependencies
 
 ```bash
 pip install apache-airflow pandas sqlalchemy psycopg2-binary requests dbt-postgres pytest
 ```
 
-4. **Configure credentials**
-   - Replace `ACCESS_KEY` in `airflow/dags/extract/extract_flights.py` with your AviationStack token
-   - Update `database_url` in `airflow/dags/flight_elt_dag.py`, or move it into an Airflow connection/Variable for production use
+### 4. Configure Credentials
 
-5. **Prepare PostgreSQL**
-   - Ensure the target database/schema exists
-   - The loader creates `raw_flights` if needed; you can manually inspect schema using `raw_flights_sample.json`
+- Set `ACCESS_KEY` in `extract_flights.py` with your AviationStack API key
+- Update `database_url` in `flight_elt_dag.py` or configure via Airflow connections
 
-## Running the Pipeline
+### 5. Prepare PostgreSQL
 
-1. **Bootstrap Airflow**
+- Ensure database and schema exist
+- The loader automatically creates the `raw_flights` table if missing
+
+---
+
+## ▶️ Running the Pipeline
+
+### Initialize Airflow
 
 ```bash
 export AIRFLOW_HOME=$(pwd)/airflow
 airflow db init
 airflow users create \
-  --username admin --password admin \
-  --firstname Admin --lastname User --role Admin --email admin@example.com
+  --username admin \
+  --password admin \
+  --firstname Admin \
+  --lastname User \
+  --role Admin \
+  --email admin@example.com
 ```
 
-2. **Start services (new terminals or background jobs)**
+### Start Airflow Services
 
 ```bash
+# Terminal 1: Start webserver
 airflow webserver --port 8080
+
+# Terminal 2: Start scheduler
 airflow scheduler
 ```
 
-3. **Trigger the DAG**
-   - Open `http://localhost:8080`, enable `elt_tasks`, and trigger a manual run
-   - Monitor logs to verify extract/load success and confirm dbt tasks finish
+### Execute the DAG
 
-## dbt Workflow
+1. Navigate to `http://localhost:8080`
+2. Enable the `elt_tasks` DAG in the UI
+3. Trigger manually or wait for scheduled run
+4. Inspect logs to view extract/load/transform steps with detailed logging
 
-You can run dbt standalone to iterate quickly on models:
+---
+
+## 🔄 dbt Workflow
+
+Run dbt transformations independently:
 
 ```bash
 cd flight_dbt
-dbt deps   # only if packages are added
-dbt run
-dbt test
+dbt run    # Execute all models
+dbt test   # Run data quality tests
 ```
 
-Generated models materialize airline delays, airport performance, and status summaries for dashboarding.
+---
 
-## Testing
+## 🧪 Testing
 
-Execute the unit tests to validate the Airflow helpers and the XCom contract:
+Run the test suite:
 
 ```bash
 pytest airflow/dags/extract/tests/test_elt_functions.py
 ```
 
-## License
+The test suite includes:
+- Unit tests for extraction logic
+- XCom behavior mocking
+- Schema validation tests
+- Error handling verification
 
-This project is available under the MIT License.
+---
 
-## Contact
+## 📧 Contact
 
-For questions or collaboration opportunities, please reach out via GitHub issues or connect on LinkedIn.
+For questions, collaboration opportunities, or bug reports:
+- **GitHub Issues**: [Open an issue](https://github.com/Hsooni491/flight-dbt-airflow-analysis/issues)
+- **LinkedIn**: [Alhussain Baalawi](https://www.linkedin.com/in/alhussain-baalawi)
+
+---
+
+**Built with ❤️ for modern data engineering**
